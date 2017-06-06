@@ -13,33 +13,33 @@ module.exports = function(grunt) {
 var mozjpeg = require('imagemin-mozjpeg');
 
   grunt.initConfig({
-    responsive_images: {
-      dev1: {
-        options: {
-          engine: 'im',
-          sizes: [{
-            width:600,
-            suffix:'_large_2x',
-            quality:30
-          }, {
-            width:300,
-            suffix:'_large_1x', // ---> Use when you need this size -- it is one si
-            quality:50
-          }]
-        }, files: [{
-                  expand: true,
-                  src: ['*.{gif,jpg,png}'],
-                  cwd: 'images_src/',
-                  dest:'images/'
-          }]
 
-        /*
-        You don't need to change this part if you don't change
-        the directory structure.
-        */
-
-      },
-      logo: {
+      // dev1: {
+      //   options: {
+      //     engine: 'im',
+      //     sizes: [{
+      //       width:600,
+      //       suffix:'_large_2x',
+      //       quality:30
+      //     }, {
+      //       width:300,
+      //       suffix:'_large_1x', // ---> Use when you need this size -- it is one si
+      //       quality:50
+      //     }]
+      //   }, files: [{
+      //             expand: true,
+      //             src: ['*.{gif,jpg,png}'],
+      //             cwd: 'images_src/',
+      //             dest:'images/'
+      //     }]
+      //
+      //   /*
+      //   You don't need to change this part if you don't change
+      //   the directory structure.
+      //   */
+      //
+      // },
+      profilepic: {
         options: {
           engine: 'im',
           sizes: [{
@@ -54,30 +54,30 @@ var mozjpeg = require('imagemin-mozjpeg');
         }, files: [{
                   expand: true,
                   src: ['*.{gif,jpg,png}'],
-                  cwd: 'images_src/logo/',
+                  cwd: 'images_src/',
                   dest:'images/'
           }]
       },
-      banner: {
-        options: {
-          engine: 'im',
-          sizes: [{
-            width:1000,
-            suffix:'_large_2x',
-            quality:80
-          }, {
-            width:600,
-            suffix:'_large_1x', // ---> Use when you need this size -- it is one si
-            quality:50
-          }]
-        }, files: [{
-                  expand: true,
-                  src: ['*.{gif,jpg,png}'],
-                  cwd: 'images_src/banner/',
-                  dest:'images/'
-          }]
-      }
-    },
+      // banner: {
+      //   options: {
+      //     engine: 'im',
+      //     sizes: [{
+      //       width:1000,
+      //       suffix:'_large_2x',
+      //       quality:80
+      //     }, {
+      //       width:600,
+      //       suffix:'_large_1x', // ---> Use when you need this size -- it is one si
+      //       quality:50
+      //     }]
+      //   }, files: [{
+      //             expand: true,
+      //             src: ['*.{gif,jpg,png}'],
+      //             cwd: 'images_src/banner/',
+      //             dest:'images/'
+      //     }]
+      // },
+
 
     /* Clear out the images directory if it exists */
     clean: {
@@ -106,32 +106,32 @@ var mozjpeg = require('imagemin-mozjpeg');
       },
     },
 
-  "imagemagick-convert" : {
-    dev1:{
-      args:['images/w_media-800_large_2x.jpg', '-strip','-quality','92','-interlace','JPEG','-colorspace','RGB','images/w_media-800_large_2x.jpg']
-    },
-    dev2:{
-      args:['images/w_pictures-800_large_2x.jpg', '-strip','-quality','92','-interlace','JPEG','-colorspace','RGB','images/w_pictures-800_large_2x.jpg']
-    },
-    dev3:{
-      args:['images/w_text-800_large_2x.jpg', '-strip','-quality','92','-interlace','JPEG','-colorspace','RGB','images/w_text-800_large_2x.jpg']
-    },
-    dev4:{
-      args:['images/w_final-800_large_2x.jpg', '-strip','-quality','92','-interlace','JPEG','-colorspace','RGB','images/w_final-800_large_2x.jpg']
-    },
-    dev5:{
-      args:['images/w_tables-800_large_2x.jpg', '-strip','-quality','92','-interlace','JPEG','-colorspace','RGB','images/w_tables-800_large_2x.jpg']
-    },
-    dev6:{
-      args:['images/w_forms-800_large_2x.jpg', '-strip','-quality','92','-interlace','JPEG','-colorspace','RGB','images/w_forms-800_large_2x.jpg']
-    },
-    dev7:{
-      args:['images/w_banner-800_large_2x.jpg', '-strip','-quality','92','-interlace','JPEG','-colorspace','RGB','images/w_banner-800_large_2x.jpg']
-    },
-    dev8:{
-      args:['images/logo_00-800_large_2x.jpg', '-strip','-quality','92','-interlace','JPEG','-colorspace','RGB','images/logo_00-800_large_2x.jpg']
-    },
-  },
+  // "imagemagick-convert" : {
+  //   dev1:{
+  //     args:['images/w_media-800_large_2x.jpg', '-strip','-quality','92','-interlace','JPEG','-colorspace','RGB','images/w_media-800_large_2x.jpg']
+  //   },
+  //   dev2:{
+  //     args:['images/w_pictures-800_large_2x.jpg', '-strip','-quality','92','-interlace','JPEG','-colorspace','RGB','images/w_pictures-800_large_2x.jpg']
+  //   },
+  //   dev3:{
+  //     args:['images/w_text-800_large_2x.jpg', '-strip','-quality','92','-interlace','JPEG','-colorspace','RGB','images/w_text-800_large_2x.jpg']
+  //   },
+  //   dev4:{
+  //     args:['images/w_final-800_large_2x.jpg', '-strip','-quality','92','-interlace','JPEG','-colorspace','RGB','images/w_final-800_large_2x.jpg']
+  //   },
+  //   dev5:{
+  //     args:['images/w_tables-800_large_2x.jpg', '-strip','-quality','92','-interlace','JPEG','-colorspace','RGB','images/w_tables-800_large_2x.jpg']
+  //   },
+  //   dev6:{
+  //     args:['images/w_forms-800_large_2x.jpg', '-strip','-quality','92','-interlace','JPEG','-colorspace','RGB','images/w_forms-800_large_2x.jpg']
+  //   },
+  //   dev7:{
+  //     args:['images/w_banner-800_large_2x.jpg', '-strip','-quality','92','-interlace','JPEG','-colorspace','RGB','images/w_banner-800_large_2x.jpg']
+  //   },
+  //   dev8:{
+  //     args:['images/logo_00-800_large_2x.jpg', '-strip','-quality','92','-interlace','JPEG','-colorspace','RGB','images/logo_00-800_large_2x.jpg']
+  //   },
+  // },
 
   imagemin: {                          // Task
     static: {                          // Target
@@ -161,13 +161,13 @@ var mozjpeg = require('imagemin-mozjpeg');
 
   });
 
-   grunt.loadNpmTasks('grunt-responsive-images');
+  //  grunt.loadNpmTasks('grunt-responsive-images');
    grunt.loadNpmTasks('grunt-imagemagick');
    grunt.loadNpmTasks('grunt-contrib-imagemin');
    grunt.loadNpmTasks('grunt-contrib-clean'); //COMMENT --> this is out because we can only run 1 file at the time to get 1x pics. also because we dont want to
    grunt.loadNpmTasks('grunt-contrib-copy');  //            delete, make dir, copy AGAIN that is why the tasks are out. 'imagemin:dynamic', 'imagemin:dynamic',
    grunt.loadNpmTasks('grunt-mkdir');
-   grunt.registerTask('default', ['clean', 'mkdir', 'copy', 'responsive_images:dev1',
-         'responsive_images:logo', 'responsive_images:banner']);
+   grunt.registerTask('default', ['clean', 'mkdir', 'copy',
+         'profilepic']);
 
 };
