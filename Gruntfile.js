@@ -13,7 +13,7 @@ module.exports = function(grunt) {
 var mozjpeg = require('imagemin-mozjpeg');
 
   grunt.initConfig({
-
+    responsive_images: {
       // dev1: {
       //   options: {
       //     engine: 'im',
@@ -76,8 +76,8 @@ var mozjpeg = require('imagemin-mozjpeg');
       //             cwd: 'images_src/banner/',
       //             dest:'images/'
       //     }]
-      // },
-
+      // }
+    },
 
     /* Clear out the images directory if it exists */
     clean: {
@@ -161,13 +161,12 @@ var mozjpeg = require('imagemin-mozjpeg');
 
   });
 
-  //  grunt.loadNpmTasks('grunt-responsive-images');
+   grunt.loadNpmTasks('grunt-responsive-images');
    grunt.loadNpmTasks('grunt-imagemagick');
    grunt.loadNpmTasks('grunt-contrib-imagemin');
    grunt.loadNpmTasks('grunt-contrib-clean'); //COMMENT --> this is out because we can only run 1 file at the time to get 1x pics. also because we dont want to
    grunt.loadNpmTasks('grunt-contrib-copy');  //            delete, make dir, copy AGAIN that is why the tasks are out. 'imagemin:dynamic', 'imagemin:dynamic',
    grunt.loadNpmTasks('grunt-mkdir');
-   grunt.registerTask('default', ['clean', 'mkdir', 'copy',
-         'profilepic']);
+   grunt.registerTask('default', ['clean', 'mkdir', 'copy', 'responsive_images:profilepic']);
 
 };
