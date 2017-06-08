@@ -10,11 +10,8 @@
   <meta name="author" content=" Wendy Martell ">
   <title>Cameron Pittman: Portfolio</title>
 
-  <!-- Hmm, what is the impact of web fonts on speed? Measure it... -->
-  <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
-
-  <link href="css/style.css" rel="stylesheet">
-  <link href="css/print.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" media="none" onload="if(media!='all')media='all'">
+  <link rel="stylesheet" href="css/print.css" media="print">
 
   <script>
     (function(w, g) {
@@ -29,8 +26,30 @@
     ga('create', 'UA-XXXX-Y');
     ga('send', 'pageview');
   </script>
-  <script src="http://www.google-analytics.com/analytics.js"></script>
+
+  <script async src="http://www.google-analytics.com/analytics.js"></script>
   <script async src="js/perfmatters.js"></script>
+
+  <!-- Hmm, what is the impact of web fonts on speed? Measure it... -->
+  <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" > -->
+  <script>
+    // <! [CDATA [
+    function loadCSS(e, t, n) {
+      "use strict";
+      var i = window.document.createElement("links");
+      var o = t || window.document.getElementsByTagName("script")[0];
+      i.rel = "stylesheet";
+      i.href = e;
+      i.media = "only x";
+      o.parentNode.insertBefore(i, o);
+      setTimeout(function() {
+        i.media = n || "all"
+      })
+    }
+    loadCSS("http://fonts.googleapis.com/css?family=Open+Sans:400,700");
+    //]]>
+  </script>
+
 </head>
 
 <body>

@@ -123,41 +123,55 @@ var mozjpeg = require('imagemin-mozjpeg');
       },
     },
 
-  imagemin: {                          // Task
-    static: {                          // Target
-      options: {                       // Target options
-        optimizationLevel: 7,
-        svgoPlugins: [{ removeViewBox: false }],
-        use: [mozjpeg()]
+    /* In case I need to do some work with pictures*/
+    imagemin: {                          // Task
+      static: {                          // Target
+        options: {                       // Target options
+          optimizationLevel: 7,
+          svgoPlugins: [{ removeViewBox: false }],
+          use: [mozjpeg()]
+        },
+        files: {                         // Dictionary of files
+          'images/img.png': 'images_src/img.png', // 'destination': 'source'
+          'images/img.jpg': 'images_src/img.jpg',
+          'images/img.gif': 'images_src/img.gif'
+        }
       },
-      files: {                         // Dictionary of files
-        'images/img.png': 'images_src/img.png', // 'destination': 'source'
-        'images/img.jpg': 'images_src/img.jpg',
-        'images/img.gif': 'images_src/img.gif'
+      dynamic: {                         // Another target
+        options: {                       // Target options
+          optimizationLevel: 7,
+        },
+        files: [{
+          expand: true,                  // Enable dynamic expansion
+          cwd: 'images/',                   // Src matches are relative to this path
+          src: ['**/*.{png,jpg,gif}'],   // Actual patterns to match
+          dest: 'images/'                  // Destination path prefix
+        }]
       }
     },
-    dynamic: {                         // Another target
-      options: {                       // Target options
-        optimizationLevel: 7,
-      },
-      files: [{
-        expand: true,                  // Enable dynamic expansion
-        cwd: 'images/',                   // Src matches are relative to this path
-        src: ['**/*.{png,jpg,gif}'],   // Actual patterns to match
-        dest: 'images/'                  // Destination path prefix
-      }]
-    }
-  }
+
+    critical: {
+     dist: {
+       options: {
+         base: './'
+       },
+       // The source file
+       src: 'index.html',
+       // The destination file
+       dest: 'index_result.html',
+       }
+     },
 
   });
 
    grunt.loadNpmTasks('grunt-responsive-images');
    grunt.loadNpmTasks('grunt-imagemagick');
+   grunt.loadNpmTasks('grunt-critical');
    grunt.loadNpmTasks('grunt-contrib-imagemin');
    grunt.loadNpmTasks('grunt-contrib-clean'); //COMMENT --> this is out because we can only run 1 file at the time to get 1x pics. also because we dont want to
    grunt.loadNpmTasks('grunt-contrib-copy');  //            delete, make dir, copy AGAIN that is why the tasks are out. 'imagemin:dynamic', 'imagemin:dynamic',
    grunt.loadNpmTasks('grunt-mkdir');
-   grunt.registerTask('default', ['clean', 'mkdir', 'copy', 'responsive_images:profilePic', 'responsive_images:projectPic',
+   grunt.registerTask('default', ['critical','clean', 'mkdir', 'copy', 'responsive_images:profilePic', 'responsive_images:projectPic',
                       'responsive_images:pizzeriaPic','responsive_images:pizzaPic']);
 
 };
