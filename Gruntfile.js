@@ -81,7 +81,7 @@ var mozjpeg = require('imagemin-mozjpeg');
           sizes: [{
             width: 200,
             suffix:'_large_2x',
-            quality:30,
+            quality:20,
           }, {
             width: 100,
             suffix:'_large_1x', // ---> Use when you need this size -- it is one si
@@ -121,6 +121,43 @@ var mozjpeg = require('imagemin-mozjpeg');
           dest: 'images/',
         }]
       },
+      images: {
+        files: [{
+          expand: true,
+          src: 'images/*.{gif,jpg,png}',
+          dest: 'dist/',
+        }]
+      },
+      images_src: {
+        files: [{
+          expand: true,
+          src: 'images_src/*.{gif,jpg,png}',
+          dest: 'dist/',
+        }]
+      },
+      views: {
+        files: [{
+          expand: true,
+          src: 'views/images/*.{gif,jpg,png}',
+          dest: 'dist/',
+        }]
+      },
+      views_img_src: {
+        files: [{
+          expand: true,
+          src: 'views/images_src/*.{gif,jpg,png}',
+          dest: 'dist/',
+        }]
+      },
+      viewsjs: {
+        files: [{
+          expand: true,
+          src: 'views/js/main.js',
+          dest: 'dist/',
+        }]
+      }
+
+
     },
 
     /* In case I need to do some work with pictures*/
@@ -156,22 +193,58 @@ var mozjpeg = require('imagemin-mozjpeg');
          base: './'
        },
        // The source file
-       src: 'index.html',
+       src: 'index_src.html',
        // The destination file
-       dest: 'index_result.html',
+       dest: 'index.html',
        }
      },
+
+     htmlmin: {
+      dist: {
+        options: {
+          removeComments: true,
+          collapseWhitespace: true,
+          minifyCSS: true,
+          minifyJS: true
+        },
+       files: {
+         'dist/index.html': 'index.html',     // 'destination': 'source'
+         'dist/css/style.css': 'css/style.css',
+         'dist/css/print.css': 'css/print.css',
+         'dist/js/perfmatters.js' : 'js/perfmatters.js',
+         'dist/project-2048.html' : 'project-2048.html',
+         'dist/project-mobile.html' : 'project-mobile.html',
+         'dist/project-webperf.html' : 'project-webperf.html'
+       }
+     },
+     view: {
+       options: {
+         removeComments: true,
+         collapseWhitespace: true,
+         minifyCSS: true,
+         minifyJS: true
+       },
+      files: {
+        'dist/views/pizza.html': 'views/pizza.html',
+        'dist/views/css/style.css': 'views/css/style.css',
+        'dist/views/css/bootstrap-grid.css': 'views/css/bootstrap-grid.css'
+      }
+    }
+
+    },
 
   });
 
    grunt.loadNpmTasks('grunt-responsive-images');
    grunt.loadNpmTasks('grunt-imagemagick');
    grunt.loadNpmTasks('grunt-critical');
+   grunt.loadNpmTasks('grunt-contrib-htmlmin');
    grunt.loadNpmTasks('grunt-contrib-imagemin');
    grunt.loadNpmTasks('grunt-contrib-clean'); //COMMENT --> this is out because we can only run 1 file at the time to get 1x pics. also because we dont want to
    grunt.loadNpmTasks('grunt-contrib-copy');  //            delete, make dir, copy AGAIN that is why the tasks are out. 'imagemin:dynamic', 'imagemin:dynamic',
    grunt.loadNpmTasks('grunt-mkdir');
-   grunt.registerTask('default', ['critical','clean', 'mkdir', 'copy', 'responsive_images:profilePic', 'responsive_images:projectPic',
-                      'responsive_images:pizzeriaPic','responsive_images:pizzaPic']);
+   grunt.registerTask('default', ['critical','htmlmin:dist','clean', 'mkdir', 'copy', 'responsive_images:profilePic',
+                      'responsive_images:projectPic','responsive_images:pizzeriaPic','responsive_images:pizzaPic',
+                      'htmlmin:view', 'copy:images', 'copy:views', 'copy:viewsjs', 'copy:views_img_src', 'copy:images_src']);
 
 };
