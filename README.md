@@ -1,55 +1,75 @@
-## Website Performance Optimization portfolio project
+# Website Optimization
 
-Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
+Website Optimization uses - **javascript, jQuery, HTML5, CSS**. 
+The objective of this project is to optimize this online portfolio for speed. In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques I've picked up in the Critical Rendering Path course.
+The original unoptimized repository is available [here](https://github.com/udacity/frontend-nanodegree-mobile-portfolio).
 
-To get started, check out the repository and inspect the code.
+## Quickstart
 
-### Getting started
+####  Using your normal browser
+  1. Clone this repo.
+  2. Open project:        frontend-nanodegree-mobile-portfolio.
+  3. Set up a local host. 
+  4. Load in Chrome using a local host `dist/index.html` and `dist/views/pizza.html`
 
-#### Part 1: Optimize PageSpeed Insights score for index.html
+### Recommended approach
 
-Some useful tips to help you get started:
+You are recommended to use SimpleHTTPServer if Python has been installed (Mac OS X and Linux should have pre-installed version). Decompress the file in Explorer (Windows) or Finder (Mac), open a terminal window, use cd command to get in the file folder and run the following command:
+`python -m SimpleHTTPServer`
+After it starts, a web browser window should be jump up. If you don't see the window, then type http://localhost:8080 into web browser address line and press Enter.
 
-1. Check out the repository
-1. To inspect the site on your phone, you can run a local server
+## What did I do? 
+##### PageSpeed
+- Mobile 92/100
+- Desktop 94/100
 
-  ```bash
-  $> cd /path/to/your-project-folder
-  $> python -m SimpleHTTPServer 8080
-  ```
+How did I carry out the optimization?
 
-1. Open a browser and visit localhost:8080
-1. Download and install [ngrok](https://ngrok.com/) to the top-level of your project directory to make your local server accessible remotely.
+#### Step 1: Improve PageSpeed Insights score for index.html
 
-  ``` bash
-  $> cd /path/to/your-project-folder
-  $> ./ngrok http 8080
-  ```
+- Specified attribute media="print" for printing stylesheet file.
+- Added async attribute to the Google Analytics script.
+- Added critical CCS style using grunt-crititcal.  
+- Used preload and js code for `css/style.css`
+- Resized and compressed all images
+- Used a script to load google api font.
 
-1. Copy the public URL ngrok gives you and try running it through PageSpeed Insights! Optional: [More on integrating ngrok, Grunt and PageSpeed.](http://www.jamescryer.com/2014/06/12/grunt-pagespeed-and-ngrok-locally-testing/)
+#### Step 2: Improve Frames per Second in pizza.html
 
-Profile, optimize, measure... and then lather, rinse, and repeat. Good luck!
+On the Pizza page, there are randomly generated pizzas with different locations, when you are scrolling, background pizzas will move left to right. All static pizzas on the page could be resized by changing the slider with options for 'small', 'medium', or 'large'.
 
-#### Part 2: Optimize Frames per Second in pizza.html
+##### Optimizations in views/pizza.html:
 
-To optimize views/pizza.html, you will need to modify views/js/main.js until your frames per second rate is 60 fps or higher. You will find instructive comments in main.js. 
+- Added souce media for responsive photos.
 
-You might find the FPS Counter/HUD Display useful in Chrome developer tools described here: [Chrome Dev Tools tips-and-tricks](https://developer.chrome.com/devtools/docs/tips-and-tricks).
+##### Optimizations in views/js/main.js:
 
-### Optimization Tips and Tricks
-* [Optimizing Performance](https://developers.google.com/web/fundamentals/performance/ "web performance")
-* [Analyzing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp.html "analyzing crp")
-* [Optimizing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/optimizing-critical-rendering-path.html "optimize the crp!")
-* [Avoiding Rendering Blocking CSS](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-blocking-css.html "render blocking css")
-* [Optimizing JavaScript](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/adding-interactivity-with-javascript.html "javascript")
-* [Measuring with Navigation Timing](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/measure-crp.html "nav timing api"). We didn't cover the Navigation Timing API in the first two lessons but it's an incredibly useful tool for automated page profiling. I highly recommend reading.
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/eliminate-downloads.html">The fewer the downloads, the better</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer.html">Reduce the size of text</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization.html">Optimize images</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching.html">HTTP caching</a>
+Compressed and resized pizza image (images/pizza.png) and created versiones of 100, 200 px  for background pizzas.
 
-### Customization with Bootstrap
-The portfolio was built on Twitter's <a href="http://getbootstrap.com/">Bootstrap</a> framework. All custom styles are in `dist/css/portfolio.css` in the portfolio repo.
+Updates in the changePizzaSizes function:
+created new array outside loop to store all Pizza containers.
+Followed Cam's lecture to change Pizza size values from pixels to percent, and removed unnecessary function
+Updates in the updatePositions function:
+Created phase array variable to hold the 5 values in a separate for-loop
+I split the for loop because reading and writing was hapenning at the same time, that was the reason for FSL.
 
-* <a href="http://getbootstrap.com/css/">Bootstrap's CSS Classes</a>
-* <a href="http://getbootstrap.com/components/">Bootstrap's Components</a>
+#### Step 3: Use the task-runner Grunt
+
+Grunt is a task-runner that for this project was used to:
+
+Create, copy and clean the destion folder clean
+Minify CSS files  minifyCSS
+Inline CSS after minifing string-replace
+Minify JavaScript files  minifyJS
+Compress images imagemin
+Minify HTML files after above tasks htmlmin
+ 
+# Development
+Want to contribute? Great!
+In adition of what is already built, you can add more cool features. 
+ 
+# License
+The content of this repository is licensed under a [Creative Commons Attribution License](https://creativecommons.org/licenses/by/3.0/us/)
+
+ 
+
