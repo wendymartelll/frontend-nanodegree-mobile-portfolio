@@ -426,10 +426,13 @@ var resizePizzas = function(size) {
     switch(size) {
       case "1":
         newWidth = 25;
+        break;
       case "2":
         newWidth = 33.33;
+        break;
       case "3":
         newWidth = 50;
+        break;
       default:
         console.log("bug in sizeSwitcher");
     }
@@ -491,8 +494,8 @@ function updatePositions() {
     phase.push(Math.sin((document.body.scrollTop / 1250) + (i % 5))); // Read
   }
 
-  for (var i = 0; i < 60; i++) {
-    items[i].style.left = items[i].basicLeft + 100 * phase[i % 5]+ 'px';    // write                                                            // Layout that is why FAL
+  for (var y = 0; y < 60; y++) {
+    items[y].style.left = items[y].basicLeft + 100 * phase [y % 5]+ 'px';    // write                                                            // Layout that is why FAL
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.

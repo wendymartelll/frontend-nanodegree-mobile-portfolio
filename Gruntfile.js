@@ -233,6 +233,11 @@ var mozjpeg = require('imagemin-mozjpeg');
 
     },
 
+    jshint: {
+      all: ['js/*.js', 'views/**/*.js'],
+      reporterOutput: "",
+    },
+
   });
 
    grunt.loadNpmTasks('grunt-responsive-images');
@@ -243,8 +248,9 @@ var mozjpeg = require('imagemin-mozjpeg');
    grunt.loadNpmTasks('grunt-contrib-clean'); //COMMENT --> this is out because we can only run 1 file at the time to get 1x pics. also because we dont want to
    grunt.loadNpmTasks('grunt-contrib-copy');  //            delete, make dir, copy AGAIN that is why the tasks are out. 'imagemin:dynamic', 'imagemin:dynamic',
    grunt.loadNpmTasks('grunt-mkdir');
+   grunt.loadNpmTasks('grunt-contrib-jshint');
    grunt.registerTask('default', ['critical','htmlmin:dist','clean', 'mkdir', 'copy', 'responsive_images:profilePic',
                       'responsive_images:projectPic','responsive_images:pizzeriaPic','responsive_images:pizzaPic',
-                      'htmlmin:view', 'copy:images', 'copy:views', 'copy:viewsjs', 'copy:views_img_src', 'copy:images_src']);
+                      'htmlmin:view', 'copy:images', 'copy:views', 'copy:viewsjs', 'copy:views_img_src', 'copy:images_src','jshint:all']);
 
 };
