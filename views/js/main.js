@@ -495,8 +495,6 @@ function updatePositions() {
     phase.push(Math.sin((document.body.scrollTop / 1250) + (i % 5))); // Read
   }
   var pizzas_num = parseInt(rows);
-  console.log("pizza_num: " + pizzas_num);
-  console.log("rows: " + rows);
   for (var y = 0; y < pizzas_num; y++) {
     items[y].style.left = items[y].basicLeft + 100 * phase [y % 5]+ 'px';    // write
   }
