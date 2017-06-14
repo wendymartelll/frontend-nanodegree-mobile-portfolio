@@ -437,7 +437,7 @@ var resizePizzas = function(size) {
         console.log("bug in sizeSwitcher");
     }
 
-    var ramdomPizzas = document.querySelectorAll(".randomPizzaContainer");
+    var ramdomPizzas = document.getElementsByClassName("randomPizzaContainer");
     for (var i = 0; i < ramdomPizzas.length; i++) {
       ramdomPizzas[i].style.width = newWidth + "%";
     }
@@ -455,8 +455,9 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+var pizzasDiv = document.getElementById("randomPizzas");
+
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -493,9 +494,11 @@ function updatePositions() {
   for (var i = 0; i < 5; i++) {
     phase.push(Math.sin((document.body.scrollTop / 1250) + (i % 5))); // Read
   }
-
-  for (var y = 0; y < 60; y++) {
-    items[y].style.left = items[y].basicLeft + 100 * phase [y % 5]+ 'px';    // write                                                            // Layout that is why FAL
+  var pizzas_num = parseInt(rows);
+  console.log("pizza_num: " + pizzas_num);
+  console.log("rows: " + rows);
+  for (var y = 0; y < pizzas_num; y++) {
+    items[y].style.left = items[y].basicLeft + 100 * phase [y % 5]+ 'px';    // write
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -510,12 +513,16 @@ function updatePositions() {
 
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
+var rows;
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+  var iHeight = window.screen.height;
+  rows = (iHeight / s) * cols;
+
+  for (var i = 0; i < rows; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza-100_large_1x.png ";
